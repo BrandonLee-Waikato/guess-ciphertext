@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+}
+
+#leftPanel, #rightPanel {
+    flex: 1; /* 使用flex允许动态调整宽度 */
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: auto; /* 添加滚动条 */
+}
+
+#leftPanel {
+    max-width: 60%; /* 左侧最大宽度 */
+    border-right: 1px solid #ccc;
+}
+
+#rightPanel {
+    max-width: 40%; /* 右侧最大宽度 */
+    padding-left: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    margin-top: 20px;
+    width: 100%; /* 表格宽度全覆盖面板 */
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+input[type="text"] {
+    width: 40px; /* 输入框宽度 */
+    text-align: center;
+}
+
+#decryptedText {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 100%; /* 解密文本宽度全覆盖面板 */
+    /*text-align: center;*/
+    margin-top: 20px;
+}
