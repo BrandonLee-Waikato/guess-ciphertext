@@ -1,6 +1,7 @@
 const cipherNumbers = ['28', '58', '20', '48', '36', '56', '54', '46', '42', '34', '24', '44', '30', '26', '22', '50', '32', '68', '60', '62', '40', '64', '70', '38', '52'];
 const initialReplacements = {};
 cipherNumbers.forEach(num => {
+    // 尝试从localStorage读取之前保存的替换值，如果没有则初始化为空字符串
     initialReplacements[num] = localStorage.getItem(num) || '';
 });
 let replacements = {...initialReplacements};
@@ -16,22 +17,22 @@ function populateTable() {
         const input = document.createElement('input');
         input.type = 'text';
         input.value = replacements[num];
-        input.setAttribute('maxlength', '1');
+        input.setAttribute('maxlength', '1');  // 设置最大长度为1
         input.oninput = function () { updateReplacements(num, input.value); };
-        input.onclick = function () { input.select(); };
+        input.onclick = function () { input.select(); };  // 点击时全选内容
         cell2.appendChild(input);
     });
 }
 
 function updateReplacements(num, newLetter) {
-    replacements[num] = newLetter.toUpperCase();
-    localStorage.setItem(num, newLetter.toUpperCase());
+    replacements[num] = newLetter; // 自动转换为大写
+    localStorage.setItem(num, newLetter); // 保存到本地存储
     decryptText();
 }
 
 function decryptText() {
     let decryptedText = cipherText.split(' ').map(num => {
-        return replacements[num] || num;
+        return replacements[num] || num;  // 未定义替换则显示原数字
     }).join(' ');
     document.getElementById('decryptedText').textContent = decryptedText;
 }
@@ -44,7 +45,6 @@ function clearStorage() {
     });
     decryptText(); // 更新解密文本
 }
-
 document.getElementById('clearStorage').addEventListener('click', clearStorage);
 
 populateTable();
