@@ -1,4 +1,4 @@
-const cipherNumbers = ['28', '58', '20', '48', '36', '56', '54', '46', '42', '34', '24', '44', '30', '26', '22', '50', '32', '68', '60', '62', '40', '64', '70', '38', '52', '66'];
+const cipherNumbers = ['28', '58', '20', '48', '36', '56', '54', '46', '42', '34', '24', '44', '30', '26', '22', '50', '32', '68', '60', '62', '40', '64', '70', '38', '52'];
 const initialReplacements = {};
 cipherNumbers.forEach(num => {
     // 尝试从localStorage读取之前保存的替换值，如果没有则初始化为空字符串
@@ -36,6 +36,16 @@ function decryptText() {
     }).join(' ');
     document.getElementById('decryptedText').textContent = decryptedText;
 }
+
+function clearStorage() {
+    cipherNumbers.forEach(num => {
+        localStorage.removeItem(num);
+        document.querySelector(`input[value="${replacements[num]}"]`).value = ''; // 清除输入框
+        replacements[num] = ''; // 清空内存中的替换映射
+    });
+    decryptText(); // 更新解密文本
+}
+document.getElementById('clearStorage').addEventListener('click', clearStorage);
 
 populateTable();
 decryptText();
